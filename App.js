@@ -95,7 +95,7 @@ const App: () => React$Node = () => {
   )
     ? 'Good service on all other lines'
     : 'Good service on all lines'
-
+  let index = 0
   return (
     <>
       {debug && (
@@ -114,7 +114,7 @@ const App: () => React$Node = () => {
                     style={{
                       flex: 3,
                       color: 'white',
-                      fontSize: 100,
+                      fontSize: 50,
                       padding: 20,
                     }}>
                     {allLinesMessage}
@@ -122,16 +122,19 @@ const App: () => React$Node = () => {
                 </View>
               )
             }
+            index++
             return (
               <View
                 style={{
                   flex: 1,
-                  borderColor: 'grey',
-                  borderWidth: 1,
-                  height: 50,
+                  borderColor: index % 2 === 0 ? 'grey' : '',
+                  borderWidth: index % 2 === 0 ?  1 : 0,
+                  borderRadius : 10,
+                  height: 80,
                   flexDirection: 'row',
                   backgroundColor: 'white',
                   alignContent: 'space-around',
+                  
                 }}>
                 <View
                   style={{
@@ -139,11 +142,12 @@ const App: () => React$Node = () => {
                     flexDirection: 'column',
                     borderLeftColor: linesColors[item.id],
                     borderLeftWidth: 10,
+                    justifyContent :"center",
                   }}>
-                  <Text style={{}}>{item.name}</Text>
+                  <Text style={{marginLeft : 10,fontSize : 18,fontWeight : "600"}}>{item.name}</Text>
                 </View>
                 {item.disruptions && item.disruptions.length > 0 && (
-                  <View style={{flex: 1, flexDirection: 'column'}}>
+                  <View style={{flex: 1, flexDirection: 'column',justifyContent :"center",fontSize : 18}}>
                     <Text>{item.disruptions[0].description}</Text>
                   </View>
                 )}
